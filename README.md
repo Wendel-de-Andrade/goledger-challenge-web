@@ -1,94 +1,86 @@
 # GoLedger Challenge — Web Interface
 
-Solução para o desafio de frontend da GoLedger. O projeto é uma interface moderna estilo catálogo (IMDb/Netflix) para gerenciamento completo de Séries, Temporadas, Episódios e Watchlists, integrada a uma API Blockchain baseada em Hyperledger Fabric.
+Solução desenvolvida para um desafio técnico de Front-End da GoLedger. A aplicação oferece uma interface em estilo catálogo para gerenciar **Séries, Temporadas, Episódios e Watchlists**, integrada a uma API baseada em **Hyperledger Fabric**.
 
----
+## Destaques técnicos
 
-## 🚀 Destaques da Implementação
+- **React 19 + TypeScript** com tipagem estrita
+- CRUD completo para entidades relacionadas
+- Camada de serviços isolada com Axios
+- Integração com API blockchain e resolução de referências por UUID
+- Componentes reutilizáveis e tipos centralizados
+- Busca em tempo real
+- Simulação de perfis Admin/Viewer
+- Tratamento e tradução de erros da API para mensagens amigáveis
+- Tailwind CSS v4 e interface responsiva
+- GitHub Actions validando `lint` e `build` em pushes e pull requests
 
-- **CRUD Completo e Relacional** — Operações de Criar, Ler, Atualizar e Deletar para todas as entidades (TV Shows, Seasons, Episodes e Watchlists), com resolução correta de chaves UUID geradas pela blockchain.
-- **Arquitetura Escalável** — Projeto organizado em componentes reutilizáveis (`cards.tsx`, `modals.tsx`), camada de serviço isolada e tipos globais TypeScript.
-- **TypeScript Estrito** — Código 100% tipado sem uso de `any`, garantindo segurança no tratamento dos dados vindos da blockchain.
-- **UI/UX Premium** — Estilização com **Tailwind CSS v4**, tema Ciano/Dark inspirado na identidade GoLedger, busca flutuante na Navbar e modais de confirmação customizados.
-- **Integração Robusta com a Blockchain** — Resolução de referências via `@key` UUID (padrão real da API GoLedger/CouchDB), com delays estratégicos para respeitar o tempo de indexação após criação de assets.
-- **Mensagens de Erro em Português** — Todos os erros retornados pela blockchain são traduzidos para o usuário de forma clara.
+## Funcionalidades
 
----
+### Catálogo de séries
+Listagem dinâmica de séries com navegação para temporadas e episódios.
 
-## 📋 Funcionalidades Implementadas
+### Busca
+Filtragem instantânea por nome enquanto o usuário digita.
 
-1. **Catálogo de Séries** — Listagem dinâmica com posters gerados por seed baseada no título da série.
-2. **Busca em Tempo Real** — Filtragem instantânea por nome enquanto o usuário digita.
-3. **Gestão de Temporadas e Episódios** — Visualização detalhada com banner de herói, gradientes e listagem de episódios por temporada.
-4. **Watchlists** — Sistema de favoritos com atualização real na rede blockchain via `updateAsset`.
-5. **Simulação de RBAC** — Toggle no cabeçalho para alternar entre perfil **Admin** (CRUD completo) e **Viewer** (apenas visualização e watchlists).
+### Temporadas e episódios
+Visualização estruturada das entidades relacionadas retornadas pela blockchain.
 
----
+### Watchlists
+Gerenciamento de favoritos com persistência por meio da API.
 
-## 🛠️ Instalação e Execução
+### Perfis de acesso
+Alternância entre os modos **Admin**, com operações de CRUD, e **Viewer**, com foco em visualização e watchlists.
 
-### Pré-requisitos
+## Stack
 
-- Node.js v18 ou superior
-- npm ou yarn
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS v4
+- Axios
+- React Router
+- Lucide React
+- Hyperledger Fabric API
 
-### 1. Clone o repositório
+## Estrutura
+
+```text
+src/
+├── components/   # Componentes visuais e modais
+├── services/     # Integração com a API
+├── types/        # Interfaces TypeScript
+└── App.tsx       # Orquestração da aplicação
+```
+
+## Configuração
+
+Clone o repositório e instale as dependências:
 
 ```bash
-git clone https://github.com/seu-usuario/goledger-challenge-web.git
+git clone https://github.com/Wendel-de-Andrade/goledger-challenge-web.git
 cd goledger-challenge-web
-```
-
-### 2. Configure o ambiente
-
-Crie um arquivo `.env` na raiz do projeto com as credenciais da API:
-
-```env
-VITE_API_URL=http://ec2-50-19-36-138.compute-1.amazonaws.com/api
-VITE_API_USER=goledger
-VITE_API_PASS=SUA_SENHA_AQUI
-```
-
-### 3. Instale as dependências
-
-```bash
 npm install
 ```
 
-### 4. Inicie o servidor de desenvolvimento
+Crie um arquivo `.env` a partir do `.env.example` e configure as credenciais da API:
+
+```env
+VITE_API_URL=http://localhost:3000/api
+VITE_API_USER=your-user
+VITE_API_PASS=your-password
+```
+
+Depois execute:
 
 ```bash
 npm run dev
 ```
 
-Acesse **http://localhost:5173** no navegador.
+## Qualidade
 
----
+O repositório possui integração contínua via GitHub Actions. A cada push ou pull request para `main`, o workflow instala as dependências, executa o ESLint e valida o build TypeScript/Vite.
 
-## 📁 Estrutura de Arquivos
+## Contexto
 
-```
-src/
-├── components/
-│   ├── cards.tsx       # Componentes visuais de listagem (TvShowCard, WatchlistCard)
-│   └── modals.tsx      # Todos os modais: formulários, alertas e confirmações
-├── services/
-│   └── api.ts          # Camada Axios para comunicação com a blockchain
-├── types/
-│   └── index.ts        # Interfaces TypeScript de todos os assets da rede
-└── App.tsx             # Orquestrador principal: rotas, estados e lógica de negócio
-```
-
----
-
-## 🔗 Tecnologias Utilizadas
-
-- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vitejs.dev/)
-- [Tailwind CSS v4](https://tailwindcss.com/)
-- [Axios](https://axios-http.com/)
-- [Lucide React](https://lucide.dev/)
-
----
-
-Desenvolvido por **Wendel** para o processo seletivo GoLedger.
+Projeto desenvolvido por **Wendel de Andrade** como solução de processo seletivo, com foco em integração de sistemas, organização do código, tipagem e experiência do usuário.
